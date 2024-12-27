@@ -146,16 +146,24 @@ def createPlate(size):
     points[ 3] = ( -size/2, -size/2, 0)
 
     # points for y
-    points[ 4] = (  size/2/np.sqrt(2),  size/2, -size/2/np.sqrt(2))
-    points[ 5] = ( -size/2/np.sqrt(2),  size/2,  size/2/np.sqrt(2))
-    points[ 6] = ( -size/2/np.sqrt(2), -size/2,  size/2/np.sqrt(2))
-    points[ 7] = (  size/2/np.sqrt(2), -size/2, -size/2/np.sqrt(2))
+    #points[ 4] = (  size/2/np.sqrt(2),  size/2, -size/2/np.sqrt(2))
+    #points[ 5] = ( -size/2/np.sqrt(2),  size/2,  size/2/np.sqrt(2))
+    #points[ 6] = ( -size/2/np.sqrt(2), -size/2,  size/2/np.sqrt(2))
+    #points[ 7] = (  size/2/np.sqrt(2), -size/2, -size/2/np.sqrt(2))
+    points[ 4] = ( -size/2,  size/2, 0)
+    points[ 5] = (  size/2,  size/2, 0)
+    points[ 6] = (  size/2, -size/2, 0)
+    points[ 7] = ( -size/2, -size/2, 0)
 
     # points for z
-    points[ 8] = ( 0,  size/2, -size/2)
-    points[ 9] = ( 0,  size/2,  size/2)
-    points[10] = ( 0, -size/2,  size/2)
-    points[11] = ( 0, -size/2, -size/2)
+    #points[ 8] = ( 0,  size/2, -size/2)
+    #points[ 9] = ( 0,  size/2,  size/2)
+    #points[10] = ( 0, -size/2,  size/2)
+    #points[11] = ( 0, -size/2, -size/2)
+    points[ 8] = ( -size/2,  size/2, 0)
+    points[ 9] = (  size/2,  size/2, 0)
+    points[10] = (  size/2, -size/2, 0)
+    points[11] = ( -size/2, -size/2, 0)
 
     TexCoords[0] = (0.0, 1.0)
     TexCoords[1] = (0.0, 0.0)
@@ -171,51 +179,26 @@ def createPlate(size):
 
 def createFace(i):
 
-    if i == 0:
+    glBegin(GL_POLYGON)
 
-        glBegin(GL_POLYGON)
-    
-        idx0 = faces[i][0]
-        idx1 = faces[i][1]
-        idx2 = faces[i][2]
-        idx3 = faces[i][3]
-    
-        glVertex3fv(points[idx0])
-        glTexCoord2fv(TexCoords[0])
-    
-        glVertex3fv(points[idx1])
-        glTexCoord2fv(TexCoords[1])
-    
-        glVertex3fv(points[idx2])
-        glTexCoord2fv(TexCoords[2])
-    
-        glVertex3fv(points[idx3])
-        glTexCoord2fv(TexCoords[3])
-        
-        glEnd()
+    idx0 = faces[i][0]
+    idx1 = faces[i][1]
+    idx2 = faces[i][2]
+    idx3 = faces[i][3]
 
-    else:
+    glVertex3fv(points[idx0])
+    glTexCoord2fv(TexCoords[0])
 
-        glBegin(GL_POLYGON)
+    glVertex3fv(points[idx1])
+    glTexCoord2fv(TexCoords[1])
+
+    glVertex3fv(points[idx2])
+    glTexCoord2fv(TexCoords[2])
+
+    glVertex3fv(points[idx3])
+    glTexCoord2fv(TexCoords[3])
     
-        idx0 = faces[i][1]
-        idx1 = faces[i][0]
-        idx2 = faces[i][3]
-        idx3 = faces[i][2]
-    
-        glVertex3fv(points[idx0])
-        glTexCoord2fv(TexCoords[0])
-    
-        glVertex3fv(points[idx1])
-        glTexCoord2fv(TexCoords[1])
-    
-        glVertex3fv(points[idx2])
-        glTexCoord2fv(TexCoords[2])
-    
-        glVertex3fv(points[idx3])
-        glTexCoord2fv(TexCoords[3])
-        
-        glEnd()
+    glEnd()
 
 def createArrow(base, height):
 
@@ -273,7 +256,6 @@ def subAxis(d, s, c = (1.0, 1.0, 1.0, 1.0)):
 
     glTranslatef(0.0, s, 0.0)
     glRotatef(-90.0, 1.0, 0.0, 0.0)
-    #glutSolidCone(2.0 * d, 4.0 * d, 5, 5)
     createArrow(3.0 * d, 6.0 * d)
 
 def axis(d, s):
@@ -353,14 +335,16 @@ def initializeGL():
    
         # テクスチャの設定
         image = textureImages[i]
-    
+
         texHeight, texWidth, _ = image.shape
     
         # テクスチャの生成と有効化
         textureIds.append(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, textureIds[i])
     
-        gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB8, texWidth, texHeight, GL_RGB, GL_UNSIGNED_BYTE, image.tobytes())
+        image_data = np.array(image, dtype=np.uint8)
+        gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, texWidth, texHeight, GL_RGBA, GL_UNSIGNED_BYTE, image_data)
+    
     
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)
@@ -393,7 +377,7 @@ def paintGL():
     # 投影変換行列
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    #gluPerspective(10.0, WIN_WIDTH / WIN_HEIGHT, 1.0, 100.0)
+
     gluPerspective(45.0, WIN_WIDTH / WIN_HEIGHT, 1.0, 100.0)
     
     # モデルビュー行列
@@ -404,70 +388,6 @@ def paintGL():
             0.0, 0.0, 0.0,       # 注視方向
             0.0, 1.0, 0.0)       # カメラの上方向
 
-    # テクスチャの有効化
-    glEnable(GL_TEXTURE_2D)
-
-    glDisable(GL_LIGHT0)
-    glDisable(GL_LIGHT1)
-    glDisable(GL_LIGHT2)
-    glDisable(GL_LIGHT3)
-    glDisable(GL_LIGHT4)
-    glDisable(GL_LIGHTING)
-
-    glPushMatrix()
-    glScalef(Scale, Scale, Scale)
-    glRotatef(ELEVATION, 1.0, 0.0, 0.0)
-    glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
-    glRotatef(ROLL, 0.0, 0.0, 1.0)
-    glTranslatef(3.2, 0.0, 0.0)
-    glRotatef(ROLL, 0.0, 0.0, -1.0)
-    glRotatef(AZIMUTH, 0.0, -1.0, 0.0)
-    glRotatef(ELEVATION, -1.0, 0.0, 0.0)
-    glTranslatef(ModelPos[0], ModelPos[1], 0)
-    glRotatef(ELEVATION, 1.0, 0.0, 0.0)
-    glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
-    glRotatef(ROLL, 0.0, 0.0, 1.0)
-
-    glCallList(idxCubeFaces[0])
-
-    glPopMatrix()
-
-    glPushMatrix()
-    glScalef(Scale, Scale, Scale)
-    glRotatef(ELEVATION, 1.0, 0.0, 0.0)
-    glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
-    glRotatef(ROLL, 0.0, 0.0, 1.0)
-    glTranslatef(0.0, 3.2, 0.0)
-    glRotatef(ROLL, 0.0, 0.0, -1.0)
-    glRotatef(AZIMUTH, 0.0, -1.0, 0.0)
-    glRotatef(ELEVATION, -1.0, 0.0, 0.0)
-    glTranslatef(ModelPos[0], ModelPos[1], 0)
-    glRotatef(ELEVATION, 1.0, 0.0, 0.0)
-    glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
-    glRotatef(ROLL, 0.0, 0.0, 1.0)
-
-    glCallList(idxCubeFaces[1])
-
-    glPopMatrix()
-
-    glPushMatrix()
-    glScalef(Scale, Scale, Scale)
-    glRotatef(ELEVATION, 1.0, 0.0, 0.0)
-    glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
-    glRotatef(ROLL, 0.0, 0.0, 1.0)
-    glTranslatef(0.0, 0.0, 3.2)
-    glRotatef(ROLL, 0.0, 0.0, -1.0)
-    glRotatef(AZIMUTH, 0.0, -1.0, 0.0)
-    glRotatef(ELEVATION, -1.0, 0.0, 0.0)
-    glTranslatef(ModelPos[0], ModelPos[1], 0.0)
-    glRotatef(ELEVATION, 1.0, 0.0, 0.0)
-    glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
-    glRotatef(ROLL, 0.0, 0.0, 1.0)
-
-    glCallList(idxCubeFaces[2])
-
-    glPopMatrix()
-    
     glBindTexture(GL_TEXTURE_2D, 0)  # テクスチャの無効化
     
     glEnable(GL_LIGHT0)
@@ -489,9 +409,6 @@ def paintGL():
         glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular)
         glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular)
 
-    glEnable(GL_BLEND)
-    glBlendFunc(GL_ONE, GL_ZERO)
-
     glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient1)
     glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse1)
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular1)
@@ -506,8 +423,19 @@ def paintGL():
     axis(d, s)
     glPopMatrix()
 
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_ONE, GL_ZERO)
+    
     glDepthMask(False)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    
+    
+    glEnable(GL_LIGHT0)
+    glEnable(GL_LIGHT1)
+    glEnable(GL_LIGHT2)
+    glEnable(GL_LIGHT3)
+    glEnable(GL_LIGHT4)
+    glEnable(GL_LIGHTING)
 
     if fAmbient:
         glMaterial(GL_FRONT, GL_AMBIENT, mat_ambient)
@@ -530,11 +458,74 @@ def paintGL():
     glCallList(idxModel)
     glPopMatrix()
 
+    # テクスチャの無効化
+    glBindTexture(GL_TEXTURE_2D, 0)
+
+    glDisable(GL_LIGHT0)
+    glDisable(GL_LIGHT1)
+    glDisable(GL_LIGHT2)
+    glDisable(GL_LIGHT3)
+    glDisable(GL_LIGHT4)
+    glDisable(GL_LIGHTING)
+    
+    glPushMatrix()
+    glScalef(Scale, Scale, Scale)
+    glRotatef(ELEVATION, 1.0, 0.0, 0.0)
+    glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
+    glRotatef(ROLL, 0.0, 0.0, 1.0)
+    glTranslatef(3.2, 0.0, 0.0)
+    glRotatef(ROLL, 0.0, 0.0, -1.0)
+    glRotatef(AZIMUTH, 0.0, -1.0, 0.0)
+    glRotatef(ELEVATION, -1.0, 0.0, 0.0)
+    glTranslatef(ModelPos[0], ModelPos[1], 0)
+    #glRotatef(ELEVATION, 1.0, 0.0, 0.0)
+    #glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
+    #glRotatef(ROLL, 0.0, 0.0, 1.0)
+
+    glCallList(idxCubeFaces[0])
+
+    glPopMatrix()
+
+    glPushMatrix()
+    glScalef(Scale, Scale, Scale)
+    glRotatef(ELEVATION, 1.0, 0.0, 0.0)
+    glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
+    glRotatef(ROLL, 0.0, 0.0, 1.0)
+    glTranslatef(0.0, 3.2, 0.0)
+    glRotatef(ROLL, 0.0, 0.0, -1.0)
+    glRotatef(AZIMUTH, 0.0, -1.0, 0.0)
+    glRotatef(ELEVATION, -1.0, 0.0, 0.0)
+    glTranslatef(ModelPos[0], ModelPos[1], 0)
+    #glRotatef(ELEVATION, 1.0, 0.0, 0.0)
+    #glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
+    #glRotatef(ROLL, 0.0, 0.0, 1.0)
+
+    glCallList(idxCubeFaces[1])
+
+    glPopMatrix()
+
+    glPushMatrix()
+    glScalef(Scale, Scale, Scale)
+    glRotatef(ELEVATION, 1.0, 0.0, 0.0)
+    glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
+    glRotatef(ROLL, 0.0, 0.0, 1.0)
+    glTranslatef(0.0, 0.0, 3.2)
+    glRotatef(ROLL, 0.0, 0.0, -1.0)
+    glRotatef(AZIMUTH, 0.0, -1.0, 0.0)
+    glRotatef(ELEVATION, -1.0, 0.0, 0.0)
+    glTranslatef(ModelPos[0], ModelPos[1], 0.0)
+    #glRotatef(ELEVATION, 1.0, 0.0, 0.0)
+    #glRotatef(AZIMUTH, 0.0, 1.0, 0.0)
+    #glRotatef(ROLL, 0.0, 0.0, 1.0)
+
+    glCallList(idxCubeFaces[2])
+
+    glPopMatrix()
+
     glDepthMask(True)
     glDisable(GL_BLEND)
 
     glFlush()
-    #glutSwapBuffers()
 
 # ウィンドウサイズ変更のコールバック関数
 def resizeGL(window, width, height):
@@ -702,18 +693,21 @@ def main():
     defineSurface()
 
     # 座標軸ラベル用画像をロード 
-    texture = cv2.imread(path_x)
-    texture = cv2.cvtColor(texture, cv2.COLOR_BGR2RGB)
+    #texture = cv2.imread(path_x)
+    texture = cv2.imread(path_x, cv2.IMREAD_UNCHANGED)
+    texture = cv2.cvtColor(texture, cv2.COLOR_BGRA2RGBA)
     texture = cv2.flip(texture, -1)
     textureImages.append(texture)
 
-    texture = cv2.imread(path_y)
-    texture = cv2.cvtColor(texture, cv2.COLOR_BGR2RGB)
+    #texture = cv2.imread(path_y)
+    texture = cv2.imread(path_y, cv2.IMREAD_UNCHANGED)
+    texture = cv2.cvtColor(texture, cv2.COLOR_BGRA2RGBA)
     texture = cv2.flip(texture, -1)
     textureImages.append(texture)
 
-    texture = cv2.imread(path_z)
-    texture = cv2.cvtColor(texture, cv2.COLOR_BGR2RGB)
+    #texture = cv2.imread(path_z)
+    texture = cv2.imread(path_z, cv2.IMREAD_UNCHANGED)
+    texture = cv2.cvtColor(texture, cv2.COLOR_BGRA2RGBA)
     texture = cv2.flip(texture, -1)
     textureImages.append(texture)
     
