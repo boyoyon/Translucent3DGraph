@@ -108,9 +108,9 @@ points = np.empty((12, 3), np.float32)
 faces = np.empty((6, 4), np.int32)
 TexCoords = np.empty((4,2), np.float32)
 
-path_x = 'x.png'
-path_y = 'y.png'
-path_z = 'z.png'
+filename_x = 'x.png'
+filename_y = 'y.png'
+filename_z = 'z.png'
 
 flagRunning = True
 
@@ -693,19 +693,19 @@ def main():
     defineSurface()
 
     # 座標軸ラベル用画像をロード 
-    #texture = cv2.imread(path_x)
+    path_x = os.path.join(os.path.dirname(__file__), filename_x)
     texture = cv2.imread(path_x, cv2.IMREAD_UNCHANGED)
     texture = cv2.cvtColor(texture, cv2.COLOR_BGRA2RGBA)
     texture = cv2.flip(texture, -1)
     textureImages.append(texture)
 
-    #texture = cv2.imread(path_y)
+    path_y = os.path.join(os.path.dirname(__file__), filename_y)
     texture = cv2.imread(path_y, cv2.IMREAD_UNCHANGED)
     texture = cv2.cvtColor(texture, cv2.COLOR_BGRA2RGBA)
     texture = cv2.flip(texture, -1)
     textureImages.append(texture)
 
-    #texture = cv2.imread(path_z)
+    path_z = os.path.join(os.path.dirname(__file__), filename_z)
     texture = cv2.imread(path_z, cv2.IMREAD_UNCHANGED)
     texture = cv2.cvtColor(texture, cv2.COLOR_BGRA2RGBA)
     texture = cv2.flip(texture, -1)
