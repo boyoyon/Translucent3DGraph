@@ -40,29 +40,29 @@
                 <img src="images/axis-label.gif">
         </p>
         <h2>使用例</h2>
-        <h3>直交するV字谷（1)</h3>
+        <h3>直交するV字谷(1)</h3>
         <p>
-            <img src="images/1.png"><br />
+            <img src="images/example1.gif"><br />
             1点で偏微分可能でも全微分可能にならない例。<br />
             x軸、z軸上ではy=0 → (x,z)=(0,0) では ∂y/∂x=0, ∂y/∂z=0<br />
             しかし、軸以外の方向には微分不可。
         </p>
         <h3>直交するV字谷(2)</h3>
         <p>
-            <img src="images/2.png"><br />
+            <img src="images/example2.gif"><br />
             1点で偏微分可能でも全微分可能にならない例。<br />
             x軸、z軸上ではy=0 → (x,z)=(0,0) では ∂y/∂x=0, ∂y/∂z=0<br />
             しかし、軸以外の方向には微分不可。
         </p>
         <h3>y=x^2+1の定義域、値域を複素数に拡張した場合の関数値の実数部</h3>
         <p>
-            <img src="images/3.png"><br />
+            <img src="images/example3.gif"><br />
             x軸上では下に凸。常に0より大きい。<br />
             z軸上では上に凸。2点で0になる。<br />
         </p>
         <h3>y=x^2+1の定義域、値域を複素数に拡張した場合の関数値の虚数部</h3>
         <p>
-            <img src="images/4.png"><br />
+            <img src="images/example4.gif"><br />
             x軸上、z軸上で0になる。<br />
         </p>
     </body>
