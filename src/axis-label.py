@@ -71,7 +71,7 @@ idxModel = -1
 
 frameNo = 1
 
-fInertia = False
+fInertia = True
 
 NUM = 50
 
@@ -124,12 +124,9 @@ def defineSurface():
             #
             # ここでy=f(x,z)を定義する
             #
+            y = np.min((np.abs(x), np.abs(z), 1.0))
+            #y = np.sqrt(np.abs(x*z))
 
-            y = np.sqrt(np.abs(x*z))
-            #y = np.min((np.abs(x), np.abs(z), 1.0))
-            #y = x ** 2 - z ** 2 + 1
-            #y = 2 * x * z
-            
             v[i][j][0] = x
             v[i][j][1] = y
             v[i][j][2] = z
@@ -324,7 +321,7 @@ def initializeGL():
     # テクスチャの有効化
     glEnable(GL_TEXTURE_2D)
 
-    createPlate(MODEL_SIZE * 3)
+    createPlate(MODEL_SIZE * 10)
 
     for i in range(3): # x, y, z
    
@@ -383,8 +380,9 @@ def paintGL():
             0.0, 0.0, 0.0,       # 注視方向
             0.0, 1.0, 0.0)       # カメラの上方向
 
-    glBindTexture(GL_TEXTURE_2D, 0)  # テクスチャの無効化
     
+    glBindTexture(GL_TEXTURE_2D, 0)  # テクスチャの無効化
+    """ 
     glEnable(GL_LIGHT0)
     glEnable(GL_LIGHT1)
     glEnable(GL_LIGHT2)
@@ -417,14 +415,14 @@ def paintGL():
     glRotatef(ROLL, 0.0, 0.0, 1.0)
     axis(d, s)
     glPopMatrix()
-
+    """ 
     glEnable(GL_BLEND)
     glBlendFunc(GL_ONE, GL_ZERO)
     
     glDepthMask(False)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
     
-    
+    """
     glEnable(GL_LIGHT0)
     glEnable(GL_LIGHT1)
     glEnable(GL_LIGHT2)
@@ -455,7 +453,7 @@ def paintGL():
 
     # テクスチャの無効化
     glBindTexture(GL_TEXTURE_2D, 0)
-
+    """
     glDisable(GL_LIGHT0)
     glDisable(GL_LIGHT1)
     glDisable(GL_LIGHT2)
