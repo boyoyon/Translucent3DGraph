@@ -14,18 +14,19 @@
         <h1><center>Translucent 3D Graph</center></h1>
         <h2>なにものか？</h2>
         <p>
-            半透明の3Dグラフを表示するプログラムです。<br>
+            半透明の3Dグラフを表示するプログラムです。<br />
             <img src="images/Translucent3DGraph.gif">
         </p>
         <h2>環境構築方法</h2>
         <p>
-            pip install opencv-python PyOpenGL glfw<br>
+            pip install opencv-python PyOpenGL glfw<br />
         </p>
         <h2>使い方</h2>
         <p>
-            python translucent3dgrpah.py<br>
-            <br>
-            defineSurface 関数で y＝f(x,z) を指定します。<br>
+            python translucent3dgrpah.py<br />
+            <br />
+            defineSurface 関数で y＝f(x,z) を指定します。<br />
+        </p>
             <table border="1">
                 <tr><th>操作</th><th>機能</th></tr>
                 <tr><td>左ボタン押下＋ドラッグ</td><td>3Dモデルの回転(yaw,pitch)</td></tr>
@@ -41,6 +42,36 @@
                 <tr><td>sキー押下</td><td>スクリーンショット保存</td></tr>
                 <tr><td>ウィンドウ閉じるボタン押下　</td><td>プログラム終了</td></tr>
             </table>
+        <p>
+                おまけ：座標軸ラベルのみ表示すると･･･<br />
+                python axis-label.py<br />
+                <img src="images/axis-label.gif">
+        </p>
+        <h2>使用例</h2>
+        <h3>直交するV字谷（1)</h3>
+        <p>
+            <img src="images/1.png"><br />
+            1点で偏微分可能でも全微分可能にならない例。<br />
+            x軸、z軸上ではy=0 → (x,z)=(0,0) では ∂y/∂x=0, ∂y/∂z=0<br />
+            しかし、軸以外の方向には微分不可。
+        </p>
+        <h3>直交するV字谷(2)</h3>
+        <p>
+            <img src="images/2.png"><br />
+            1点で偏微分可能でも全微分可能にならない例。<br />
+            x軸、z軸上ではy=0 → (x,z)=(0,0) では ∂y/∂x=0, ∂y/∂z=0<br />
+            しかし、軸以外の方向には微分不可。
+        </p>
+        <h3>y=x^2+1の定義域、値域を複素数に拡張した場合の関数値の実数部</h3>
+        <p>
+            <img src="images/3.png"><br />
+            x軸上では下に凸。常に0より大きい。<br />
+            z軸上では上に凸。2点で0になる。<br />
+        </p>
+        <h3>y=x^2+1の定義域、値域を複素数に拡張した場合の関数値の虚数部</h3>
+        <p>
+            <img src="images/4.png"><br />
+            x軸上、z軸上で0になる。<br />
         </p>
     </body>
 </html>
