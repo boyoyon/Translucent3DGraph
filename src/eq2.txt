@@ -1,0 +1,1 @@
+np.min((1,np.min((np.abs(x),np.abs(z)))))

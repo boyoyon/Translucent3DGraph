@@ -1,0 +1,1 @@
+(np.sin(x) * np.exp(-z) + np.sin(-x) * np.exp(z)) / 2
