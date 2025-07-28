@@ -139,9 +139,9 @@ def defineSurface():
 
             y = eval(expression)
             
-            v[i][j][0] = x
+            v[i][j][0] = x / Xscale
             v[i][j][1] = y
-            v[i][j][2] = z
+            v[i][j][2] = z / Zscale
 
             #r = np.sqrt((x * 2.0) ** 2 + 1.0 + (z * 2.0) ** 2)
 
