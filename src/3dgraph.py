@@ -647,27 +647,34 @@ def keyboardEvent(window, key, scancode, action, mods):
     if key == KEY_X and action == 1 and mods & glfw.MOD_SHIFT == 0:
         Xscale *= 0.9
         fRedefineSurface = True
+        print('Xscale:%.2f Yscale:%.2f Zscale:%.2f' % (Xscale, Yscale, Zscale))
 
     if key == KEY_X and action == 1 and mods & glfw.MOD_SHIFT == 1:
         Xscale *= 1.1
         fRedefineSurface = True
+        print('Xscale:%.2f Yscale:%.2f Zscale:%.2f' % (Xscale, Yscale, Zscale))
 
     if key == KEY_Y and action == 1 and mods & glfw.MOD_SHIFT == 0:
         Yscale *= 0.9
+        print('Xscale:%.2f Yscale:%.2f Zscale:%.2f' % (Xscale, Yscale, Zscale))
 
     if key == KEY_Y and action == 1 and mods & glfw.MOD_SHIFT == 1:
         Yscale *= 1.1
+        print('Xscale:%.2f Yscale:%.2f Zscale:%.2f' % (Xscale, Yscale, Zscale))
 
     if key == KEY_Z and action == 1 and mods & glfw.MOD_SHIFT == 0:
         Zscale *= 0.9
         fRedefineSurface = True
+        print('Xscale:%.2f Yscale:%.2f Zscale:%.2f' % (Xscale, Yscale, Zscale))
 
     if key == KEY_Z and action == 1 and mods & glfw.MOD_SHIFT == 1:
         Zscale *= 1.1
         fRedefineSurface = True
+        print('Xscale:%.2f Yscale:%.2f Zscale:%.2f' % (Xscale, Yscale, Zscale))
 
     if key == KEY_MINUS and action == 1:
         Yscale *= -1
+        print('Xscale:%.2f Yscale:%.2f Zscale:%.2f' % (Xscale, Yscale, Zscale))
 
     if scancode == SCANCODE_ESC:
         flagRunning = False
