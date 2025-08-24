@@ -15,12 +15,14 @@
         </p>
         <h2>使い方</h2>
         <p>
-            python 3dgrpah.py<br>
+            ① 引数なし:　python 3dgrpah.py<br>
             "equation.txt" で指定されたf(x,z)の3Dグラフを表示します<br>
             <br>
-            python 3dgrpah.py (equation text file)<br>
+            ② 引数で式を記述したファイルを指定：　python 3dgrpah.py (equation text file)<br>
             引数で指定したテキストファイル内で指定された f(x,z)の3Dグラフを表示します<br>
             <br>
+            ③ 引数で式を指定：python 3dgrpah.py (f(x,z)の式)<br>
+            例) python 3dgrpah.py np.sqrt(np.abs(x) * np.abs(z))<br>
             python continuous_shooting.py (開始角度(0)) (終了角度(360))　(角度ステップ(5))<br>
             3Dグラフを連写してscreenshot_****.png に出力します。<br>
             式は「equation.txt」で指定します。<br>
