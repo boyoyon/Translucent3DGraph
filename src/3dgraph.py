@@ -758,14 +758,26 @@ def main():
     print('[uasge] python %s                      : \"equation.txt\" is used' % argv[0])
     print('[usage] python %s <equation text file>' % argv[0])
 
-    if argc > 1:
-
-        with open(argv[1], 'r', encoding='utf-8') as f:
-            expression = f.read().strip()
-    else:
+    if argc == 1:
 
         with open(FILE_EQUATION, 'r', encoding='utf-8') as f:
             expression = f.read().strip()
+
+    else:
+
+        if os.path.exists(argv[1]):
+
+            with open(argv[1], 'r', encoding='utf-8') as f:
+                expression = f.read().strip()
+
+        else:
+
+            expression = ''
+
+            for i in range(1, argc):
+
+                expression += argv[i]
+                expression += ' '
 
     print('equation:')
     print(expression)
