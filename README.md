@@ -23,6 +23,7 @@
             <br>
             ③ 引数で式を指定：python 3dgrpah.py (f(x,z)の式)<br>
             例) python 3dgrpah.py np.sqrt(np.abs(x) * np.abs(z))<br>
+            <br>
             python continuous_shooting.py (開始角度(0)) (終了角度(360))　(角度ステップ(5))<br>
             3Dグラフを連写してscreenshot_****.png に出力します。<br>
             式は「equation.txt」で指定します。<br>
