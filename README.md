@@ -18,7 +18,7 @@
             ① 引数なし:　python 3dgrpah.py<br>
             "equation.txt" で指定されたf(x,z)の3Dグラフを表示します<br>
             <br>
-            ② 引数で式を記述したファイルを指定：　python 3dgrpah.py (equation text file)<br>
+            ② 引数で式を記述したファイルを指定：　python 3dgrpah.py (f(x,z)を記述したテキストファイル)<br>
             引数で指定したテキストファイル内で指定された f(x,z)の3Dグラフを表示します<br>
             <br>
             ③ 引数で式を指定：python 3dgrpah.py (f(x,z)の式)<br>
